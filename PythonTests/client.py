@@ -1,15 +1,28 @@
 import socket
-import sys
+import os, os.path
 
-# Create a UDS socket
-sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-
-# Connect the socket to the port where the server is listening
+#   set server address
 serverAddress = "./pythonServer"
 
-print("connecting to " + serverAddress)
-try:
-    sock.connect(serverAddress)
-except (socket.error, msg):
-    print >>sys.stderr, msg
-    sys.exit(1)
+#   set server address
+clientAddress = "./pythonClient"
+
+#   check if server address exists
+if os.path.exists(clientAddress):
+  os.remove(clientAddress)
+
+
+# Create a UDS socket
+sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+sock.bind(clientAddress)
+
+print("client bound to " + clientAddress)
+
+while (1):
+
+    try: 
+        sock.sendto(str.encode(input()), serverAddress)
+
+    except:
+        print("server was not found :(")
+
