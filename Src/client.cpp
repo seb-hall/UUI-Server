@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <cstring>
 
-#define SOCKET_PATH "UUI-SERVER"
+#define SOCKET_PATH "./pythonServer"
 
 
 int main(int argc, char* argv[]) {
@@ -23,11 +23,11 @@ int main(int argc, char* argv[]) {
 
     // Connect to the socket
     connect(sockfd, (struct sockaddr*)&address, sizeof(address));
-
+    
     // Write the message to the socket
-    write(sockfd, argv[1], strlen(argv[1]) + 1);
-    close(sockfd);
-
+    //write(sockfd, argv[1], strlen(argv[1]) + 1);
+    //close(sockfd);
+    /*
     // Listen for connections
     listen(sockfd, 5);
 
@@ -40,6 +40,8 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     close(newsockfd);
+
+    */
 
     return 0;
 }
